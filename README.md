@@ -32,6 +32,39 @@ conda env create -f inference-env.yml -n myenv
 conda activate myenv
 ```
 
+### Direct Sampling
+
+#### Baseline: LongCite-8B
+
+```bash
+python eval-direct-sampling.py \
+    --model_path THUDM/LongCite-llama3.1-8b \
+    --tokenizer_path THUDM/LongCite-llama3.1-8b \
+    --save_dir $YOUR_OUTPUT_DIR \
+    --num_gpus $NUM_GPUS
+```
+
+#### Ours: [SelfCite-8B](https://huggingface.co/voidism/SelfCite-8B)
+
+```bash
+python eval-direct-sampling.py \
+    --model_path voidism/SelfCite-8B \
+    --tokenizer_path THUDM/LongCite-llama3.1-8b \
+    --save_dir $YOUR_OUTPUT_DIR \
+    --num_gpus $NUM_GPUS
+```
+
+#### Ours: [SelfCite-8B from ContextCite (CC)](https://huggingface.co/voidism/SelfCite-8B-from-CC) -- a fully self-supervised setting
+
+```bash
+python eval-direct-sampling.py \
+    --model_path voidism/SelfCite-8B-from-CC \
+    --tokenizer_path meta-llama/Llama-3.1-8B-Instruct \
+    --save_dir $YOUR_OUTPUT_DIR \
+    --num_gpus $NUM_GPUS \
+    --llama_chat_template
+```
+
 ### Best-of-N Sampling
 
 #### Step 1: Sampling candidates
@@ -97,38 +130,6 @@ If you have multiple shards, you can combine the results by:
 python merge_shards.py "$YOUR_FINAL_OUTPUT_DIR/log_prob_drop_and_hold/shard_*/tmp/*.jsonl" combined_output.json
 ```
 
-### Direct Sampling
-
-#### Baseline: LongCite-8B
-
-```bash
-python eval-direct-sampling.py \
-    --model_path THUDM/LongCite-llama3.1-8b \
-    --tokenizer_path THUDM/LongCite-llama3.1-8b \
-    --save_dir $YOUR_OUTPUT_DIR \
-    --num_gpus $NUM_GPUS
-```
-
-#### Ours: [SelfCite-8B](https://huggingface.co/voidism/SelfCite-8B)
-
-```bash
-python eval-direct-sampling.py \
-    --model_path voidism/SelfCite-8B \
-    --tokenizer_path THUDM/LongCite-llama3.1-8b \
-    --save_dir $YOUR_OUTPUT_DIR \
-    --num_gpus $NUM_GPUS
-```
-
-#### Ours: [SelfCite-8B from ContextCite (CC)](https://huggingface.co/voidism/SelfCite-8B-from-CC) -- a fully self-supervised setting
-
-```bash
-python eval-direct-sampling.py \
-    --model_path voidism/SelfCite-8B-from-CC \
-    --tokenizer_path meta-llama/Llama-3.1-8B-Instruct \
-    --save_dir $YOUR_OUTPUT_DIR \
-    --num_gpus $NUM_GPUS \
-    --llama_chat_template
-```
 
 ## Evaluation with GPT-4o
 
@@ -142,14 +143,7 @@ Here is an example of eval scores for reproducing BoN with LongCite-8B:
 ```
 # eval_cite.py
 
-{'scores': {'longbench-chat': {'citation_recall': 0.7051421654973379, 'citation_precision': 0.7814080212910136, 'citation_f1': 0.7110260258222623, 'finish': True}, 'multifie
-ldqa_en': {'citation_recall': 0.7660925925925927, 'citation_precision': 0.900499801568687, 'citation_f1': 0.8078295744668001, 'finish': True}, 'multifieldqa_zh': {'citation_
-recall': 0.775168360685582, 'citation_precision': 0.9532764437360026, 'citation_f1': 0.8341368453045668, 'finish': True}, 'multifieldqa': {'citation_recall': 0.7712787457885
-866, 'citation_precision': 0.9306578828071531, 'citation_f1': 0.8228623006598098, 'finish': True}, 'hotpotqa': {'citation_recall': 0.701994887057387, 'citation_precision': 0
-.7575486596736596, 'citation_f1': 0.6958512321505665, 'finish': True}, 'dureader': {'citation_recall': 0.7213021157293504, 'citation_precision': 0.8807152088051942, 'citatio
-n_f1': 0.7733387456771217, 'finish': True}, 'gov_report': {'citation_recall': 0.8945381375781791, 'citation_precision': 0.9258361384440542, 'citation_f1': 0.9048006592845036
-, 'finish': True}}, 'avg_citation_recall': 0.7588512103301681, 'avg_citation_precision': 0.8552331822042148, 'avg_citation_f1': 0.7815757927188528, 'finish': True, 'gpt_usag
-e': {'prompt_tokens': 5398114, 'completion_tokens': 88554, 'gpt_model': 'gpt-4o-2024-05-13'}}
+{'scores': {'longbench-chat': {'citation_recall': 0.7051421654973379, 'citation_precision': 0.7814080212910136, 'citation_f1': 0.7110260258222623, 'finish': True}, 'multifieldqa_en': {'citation_recall': 0.7660925925925927, 'citation_precision': 0.900499801568687, 'citation_f1': 0.8078295744668001, 'finish': True}, 'multifieldqa_zh': {'citation_recall': 0.775168360685582, 'citation_precision': 0.9532764437360026, 'citation_f1': 0.8341368453045668, 'finish': True}, 'multifieldqa': {'citation_recall': 0.7712787457885866, 'citation_precision': 0.9306578828071531, 'citation_f1': 0.8228623006598098, 'finish': True}, 'hotpotqa': {'citation_recall': 0.701994887057387, 'citation_precision': 0.7575486596736596, 'citation_f1': 0.6958512321505665, 'finish': True}, 'dureader': {'citation_recall': 0.7213021157293504, 'citation_precision': 0.8807152088051942, 'citation_f1': 0.7733387456771217, 'finish': True}, 'gov_report': {'citation_recall': 0.8945381375781791, 'citation_precision': 0.9258361384440542, 'citation_f1': 0.9048006592845036, 'finish': True}}, 'avg_citation_recall': 0.7588512103301681, 'avg_citation_precision': 0.8552331822042148, 'avg_citation_f1': 0.7815757927188528, 'finish': True, 'gpt_usage': {'prompt_tokens': 5398114, 'completion_tokens': 88554, 'gpt_model': 'gpt-4o-2024-05-13'}}
 
 # eval_correct.py
 

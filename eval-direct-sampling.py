@@ -78,7 +78,7 @@ def get_pred(rank, data, gpu_per_model):
                 fout.flush()
         except KeyboardInterrupt as e:
             raise e
-        except torch.OutOfMemoryError as e:
+        except torch.cuda.OutOfMemoryError as e:
             print('OOM')
             print(js['idx'])
             print(query)
