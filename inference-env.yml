@@ -303,4 +303,3 @@ dependencies:
       - xxhash==3.5.0
       - yarl==1.12.1
       - zipp==3.21.0
-prefix: /data/home/yungsung/miniconda3/envs/liger

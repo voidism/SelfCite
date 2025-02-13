@@ -29,9 +29,6 @@ num_gpus = args.num_gpus
 mp.set_start_method("spawn", force=True)
 gpus = list(range(num_gpus))
 
-
-
-
 save_name = model_path.split('/')[-1]
 save_dir = f"{save_dir}/shard_{shard_id}_out_of_{total_shards}"
 os.makedirs(f'{save_dir}/tmp', exist_ok=True)

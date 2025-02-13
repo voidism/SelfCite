@@ -6,10 +6,10 @@
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/YungSungChuang/)
 [![GitHub Stars](https://img.shields.io/github/stars/voidism/SelfCite?style=social)](https://github.com/voidism/SelfCite/stargazers)
 
-This repository contains the implementation for the paper "SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models"
+The implementation for the paper "SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models"
 
 Paper: https://arxiv.org/abs/25xx.xxxxx  
-Authors: [Yung-Sung Chuang](https://people.csail.mit.edu/yungsung/)$^\dagger$, [Benjamin Cohen-Wang](https://bencw99.github.io/)$^\dagger$, [Shannon Zejiang Shen](https://www.szj.io/)$^\dagger$, [Zhaofeng Wu](https://zhaofengwu.github.io/)$^\dagger$, [Hu Xu](https://howardhsu.github.io/)$^\ddagger$, [Xi Victoria Lin](https://victorialin.org/)$^\ddagger$, [Shang-Wen Li](https://swdanielli.github.io/)$^\ddagger$, [James Glass](https://people.csail.mit.edu/jrg/)$^\dagger$, [Wen-tau Yih](https://scottyih.org/)$^\ddagger$  
+Authors: [Yung-Sung Chuang](https://people.csail.mit.edu/yungsung/)$^\dagger$, [Benjamin Cohen-Wang](https://bencw99.github.io/)$^\dagger$, [Shannon Zejiang Shen](https://www.szj.io/)$^\dagger$, [Zhaofeng Wu](https://zhaofengwu.github.io/)$^\dagger$, [Hu Xu](https://howardhsu.github.io/)$^\ddagger$, [Xi Victoria Lin](https://victorialin.org/)$^\ddagger$, [James Glass](https://people.csail.mit.edu/jrg/)$^\dagger$, [Shang-Wen Li](https://swdanielli.github.io/)$^\ddagger$, [Wen-tau Yih](https://scottyih.org/)$^\ddagger$  
 $^\dagger$ Massachusetts Institute of Technology, $^\ddagger$ Meta AI
 
 ![main-fig](SelfCite.png)
@@ -25,7 +25,15 @@ The effectiveness of SelfCite is demonstrated by increasing citation F1 up to 5.
 
 ### Requirements
 
-Create a conda environment from `inference-env.yml`:
+Install the dependencies with conda and pip:
+```
+conda env create -n myenv python=3.10.14
+conda activate myenv
+pip install torch==2.4.0
+pip install -r inference-requirements.txt
+```
+
+or try to create a conda env from `inference-env.yaml`: (notice that sometimes the installation fails due to the support of `torch` and some version conflicts)
 
 ```bash
 conda env create -f inference-env.yml -n myenv
@@ -77,12 +85,7 @@ python eval-best-of-n-sampling.py \
     --num_gpus $NUM_GPUS
 ```
 
-If you have multiple nodes, e.g. 4 nodes, you can add the following arguments to split the examples into 4 shards and run them independently:
-
-```
-    --total_shards 4 \
-    --shard_id $TASK_ID \
-```
+If you have multiple nodes, e.g. 4 nodes, you can add the following arguments to split the examples into 4 shards and run them independently: ` --total_shards 4  --shard_id $TASK_ID `
 
 #### Step 2: Reranking candidates
 
@@ -99,12 +102,7 @@ python eval-best-of-n-reranking.py \
     --num_gpus $NUM_GPUS
 ```
 
-You can still add the following arguments to split the examples into 4 shards and run them independently:
-
-```
-    --total_shards 4 \
-    --shard_id $TASK_ID \
-```
+You can still add the following arguments to split the examples into 4 shards and run them independently: ` --total_shards 4 --shard_id $TASK_ID `
 
 ##### When sampling with SelfCite-8B-from-CC model
 
@@ -124,21 +122,27 @@ Other Arguments:
 
 #### Step 3: Combine the shards (optional)
 
-If you have multiple shards, you can combine the results by:
+If you have done the inference with multiple shards, you can combine the results of different shards by:
 
 ```bash
 python merge_shards.py "$YOUR_FINAL_OUTPUT_DIR/log_prob_drop_and_hold/shard_*/tmp/*.jsonl" combined_output.json
 ```
 
-
 ## Evaluation with GPT-4o
 
-Please clone the repo of [LongCite](https://github.com/THUDM/LongCite.git) by `git clone https://github.com/THUDM/LongCite.git` and run the GPT-4o evaluation using the following two scripts: (you have to change the paths in the scripts) 
+Please clone the repo of [LongCite](https://github.com/THUDM/LongCite.git) by `git clone https://github.com/THUDM/LongCite.git` and run the GPT-4o evaluation using the following two scripts: (you have to change the json file paths and api key in the scripts) 
 
 - Evaluate citation precision/recall/F1: https://github.com/THUDM/LongCite/blob/main/LongBench-Cite/eval_cite.py
 - Evaluate answer correctness: https://github.com/THUDM/LongCite/blob/main/LongBench-Cite/eval_correct.py
 
-Here is an example of eval scores for reproducing BoN with LongCite-8B:
+Alternatively, we also provide two simple end-to-end scripts that can directly execute the code of above two files without manually edit the `.py` files, but please always refer to the original code of LongCite for the most up-to-date version.
+
+```bash
+python gpt4o_eval_cite.py --openai_key [your openai api key] --pred_paths [json file names joined by comma]
+python gpt4o_eval_correct.py --openai_key [your openai api key] --pred_paths [json file names joined by comma]
+```
+
+Here is an example of output scores for the reproduced BoN result with LongCite-8B:
 
 ```
 # eval_cite.py
@@ -167,7 +171,8 @@ Please cite our paper as well as LongCite if it's helpful to your work!
 ```bibtex
 @inproceedings{chuang2025selfcite,
   title={SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models},
-  author={Yung-Sung Chuang and Benjamin Cohen-Wang and Shannon Zejiang Shen and Zhaofeng Wu and Hu Xu and Xi Victoria Lin and Shang-Wen Li and James Glass and Wen-tau Yih},
+  author={Yung-Sung Chuang and Benjamin Cohen-Wang and Shannon Zejiang Shen and Zhaofeng Wu and Hu Xu and Xi Victoria Lin and James Glass and Shang-Wen Li and Wen-tau Yih},
+  journal={arXiv preprint arXiv:25xx.xxxxx},
   year={2025}
 }
 

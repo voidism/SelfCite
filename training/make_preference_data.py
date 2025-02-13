@@ -58,7 +58,3 @@ print(f"Output data length: {len(output_data)}")
 with open(output_file, 'w') as f:
     json.dump(output_data, f, indent=2, ensure_ascii=False)
     
-
-
-
-# format is [{'idx': ..., 'prediction': ...}, ...]
