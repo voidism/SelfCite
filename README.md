@@ -1,14 +1,14 @@
 # SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-g.svg)](https://opensource.org/licenses/MIT)
-[![Arxiv](https://img.shields.io/badge/arXiv-25xx.xxxxx-B21A1B)](https://arxiv.org/abs/2309.03883)
+[![Arxiv](https://img.shields.io/badge/arXiv-2502.09604-B21A1B)](https://arxiv.org/abs/2502.09604)
 [![Hugging Face Transformers](https://img.shields.io/badge/%F0%9F%A4%97-Transformers-blue)](https://github.com/huggingface/transformers)
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/YungSungChuang/)
 [![GitHub Stars](https://img.shields.io/github/stars/voidism/SelfCite?style=social)](https://github.com/voidism/SelfCite/stargazers)
 
 The implementation for the paper "SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models"
 
-Paper: https://arxiv.org/abs/25xx.xxxxx  
+Paper: https://arxiv.org/abs/2502.09604  
 Authors: [Yung-Sung Chuang](https://people.csail.mit.edu/yungsung/)$^\dagger$, [Benjamin Cohen-Wang](https://bencw99.github.io/)$^\dagger$, [Shannon Zejiang Shen](https://www.szj.io/)$^\dagger$, [Zhaofeng Wu](https://zhaofengwu.github.io/)$^\dagger$, [Hu Xu](https://howardhsu.github.io/)$^\ddagger$, [Xi Victoria Lin](https://victorialin.org/)$^\ddagger$, [James Glass](https://people.csail.mit.edu/jrg/)$^\dagger$, [Shang-Wen Li](https://swdanielli.github.io/)$^\ddagger$, [Wen-tau Yih](https://scottyih.org/)$^\ddagger$  
 $^\dagger$ Massachusetts Institute of Technology, $^\ddagger$ Meta AI
 
@@ -135,7 +135,7 @@ Please clone the repo of [LongCite](https://github.com/THUDM/LongCite.git) by `g
 - Evaluate citation precision/recall/F1: https://github.com/THUDM/LongCite/blob/main/LongBench-Cite/eval_cite.py
 - Evaluate answer correctness: https://github.com/THUDM/LongCite/blob/main/LongBench-Cite/eval_correct.py
 
-Alternatively, we also provide two simple end-to-end scripts that can directly execute the code of above two files without manually edit the `.py` files, but please always refer to the original code of LongCite for the most up-to-date version.
+Alternatively, we also provide two simple end-to-end scripts that can directly execute the code of above two files without manually editing the `.py` files, but please always refer to the original code of LongCite for the most up-to-date version.
 
 ```bash
 python gpt4o_eval_cite.py --openai_key [your openai api key] --pred_paths [json file names joined by comma]
@@ -154,7 +154,7 @@ Here is an example of output scores for the reproduced BoN result with LongCite-
 {'scores': {'longbench-chat': {'gpt_score': 0.6639999999999999, 'finish': True}, 'multifieldqa_en': {'gpt_score': 0.81, 'finish': True}, 'multifieldqa_zh': {'gpt_score': 0.84, 'finish': True}, 'multifieldqa': {'gpt_score': 0.8271428571428572, 'finish': True}, 'hotpotqa': {'gpt_score': 0.65, 'finish': True}, 'dureader': {'gpt_score': 0.65, 'finish': True}, 'gov_report': {'gpt_score': 0.5875, 'finish': True}}, 'avg_gpt_score': 0.6757285714285713, 'finish': True, 'gpt_usage': {'prompt_tokens': 679799, 'completion_tokens': 4658, 'gpt_model': 'gpt-4o-2024-05-13'}}
 ```
 
-The sampling process has randomness but the average scores will be close to the numbers on our paper.
+The sampling process (for both our model & GPT-4o evaluation) has certain amount of randomness but the averaged scores will be close to the numbers on our paper.
 
 ## Training
 
@@ -166,13 +166,15 @@ See the `training` directory for the training code. We follow SimPO's training p
 - SimPO: https://github.com/princeton-nlp/SimPO
 
 ## Citation
-Please cite our paper as well as LongCite if it's helpful to your work!
+Please cite our paper as well as LongCite if they are helpful to your work!
+
+[![DOI](https://img.shields.io/badge/DOI-10.48550/arXiv.2502.09604-green?color=FF8000?color=009922)](https://doi.org/10.48550/arXiv.2502.09604)
 
 ```bibtex
 @inproceedings{chuang2025selfcite,
   title={SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models},
   author={Yung-Sung Chuang and Benjamin Cohen-Wang and Shannon Zejiang Shen and Zhaofeng Wu and Hu Xu and Xi Victoria Lin and James Glass and Shang-Wen Li and Wen-tau Yih},
-  journal={arXiv preprint arXiv:25xx.xxxxx},
+  journal={arXiv preprint arXiv:2502.09604},
   year={2025}
 }
 

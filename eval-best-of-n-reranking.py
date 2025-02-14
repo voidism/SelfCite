@@ -12,10 +12,10 @@ import copy
 import argparse
 import glob
 import random
-# random seed
-random.seed(0)
+
 torch.manual_seed(0)
-torch.cuda.manual_seed(0)
+random.seed(0)
+torch.cuda.manual_seed_all(0)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--shard_id", type=int, default=0)
@@ -37,6 +37,7 @@ total_shards = args.total_shards
 rerank_method = args.rerank_method
 num_gpus = args.num_gpus
 model_path = args.model_path
+
 
 # if file not exists, download it from https://github.com/THUDM/LongCite/raw/refs/heads/main/LongBench-Cite/LongBench-Cite.json
 if not os.path.exists("LongBench-Cite.json"):

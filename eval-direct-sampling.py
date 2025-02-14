@@ -9,10 +9,10 @@ import traceback
 import torch.multiprocessing as mp
 import argparse
 import random
-# random seed
-random.seed(0)
+
 torch.manual_seed(0)
-torch.cuda.manual_seed(0)
+random.seed(0)
+torch.cuda.manual_seed_all(0)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model_path", type=str, default="THUDM/LongCite-llama3.1-8b")
@@ -21,6 +21,7 @@ parser.add_argument("--save_dir", type=str, default="preds")
 parser.add_argument("--num_gpus", type=int, default=8)
 parser.add_argument("--llama_chat_template", action="store_true")
 parser.add_argument("--subset", type=str, default="all")
+parser.add_argument("--seed", type=int, default=None)
 args = parser.parse_args()
 
 model_path = args.model_path
@@ -36,6 +37,8 @@ if not os.path.exists("LongBench-Cite.json"):
         f.write(requests.get(url).content)
 
 ipts = json.load(open("LongBench-Cite.json"))
+if args.subset != 'all':
+    ipts = [x for x in ipts if x['dataset'] == args.subset]
 
 os.makedirs(save_dir, exist_ok=True)
 save_name = model_path.rsplit('/', 1)[1]
@@ -59,8 +62,6 @@ def get_pred(rank, data, gpu_per_model):
     )
     model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16, trust_remote_code=True, device_map="auto", quantization_config=quant_config, attn_implementation="flash_attention_2")
     for js in tqdm(data):
-        if args.subset != 'all' and js['dataset'] != args.subset:
-            continue
         try:
             context, query = js['context'], js['query']
             res = model.query_longcite(context, query, tokenizer=tokenizer, max_input_length=128000, max_new_tokens=1024, llama_chat_template=args.llama_chat_template)
