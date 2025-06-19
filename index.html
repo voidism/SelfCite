@@ -1,40 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="DESCRIPTION META TAG">
-  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
-  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <!-- ✦ Social banners (fill paths to your exported banners) -->
+  <meta name="description" content="SelfCite is a self-supervised method that teaches an LLM to produce fine-grained, accurate, sentence-level citations without any human labels or proprietary APIs.">
+  <meta property="og:title" content="SelfCite: Self-Supervised Alignment for Context Attribution"/>
+  <meta property="og:description" content="SelfCite boosts citation correctness on LongBench-Cite by up to 5.3 F1 with only self-supervised rewards."/>
+  <meta property="og:url" content="https://your-domain.com/selfcite"/>
+  <meta property="og:image" content="static/images/selfcite_banner.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
 
-
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
-  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:title" content="SelfCite: Self-Supervised Alignment for Context Attribution"/>
+  <meta name="twitter:description" content="Sentence-level, verifiable citations with zero human labels."/>
+  <meta name="twitter:image" content="static/images/selfcite_twitter.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="keywords" content="LLM, citation, hallucination, attribution, self-supervised, SelfCite">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-  <title>Academic Project Page</title>
+  <title>SelfCite · Self-Supervised Alignment for LLM Citations</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
+  <!-- Bulma + extras -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -46,267 +39,271 @@
 </head>
 <body>
 
+<!-- MathJax for LaTeX rendering -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
-
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">Institution Name<br>Conferance name and year</span>
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
-
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- Arxiv PDF link -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- Supplementary PDF link -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
-
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
+<!-- ─────────────────────────────── Hero ─────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://people.csail.mit.edu/yungsung/" target="_blank">Yung-Sung Chuang</a>,</span>
+            <span class="author-block"><a href="https://bencw99.github.io" target="_blank">Benjamin Cohen-Wang</a>,</span>
+            <span class="author-block"><a href="https://www.szj.io" target="_blank">Shannon Zejiang Shen</a>,</span>
+            <span class="author-block"><a href="https://zhaofengwu.github.io" target="_blank">Zhaofeng Wu</a>,</span>
+            <span class="author-block"><a href="https://howardhsu.github.io/" target="_blank">Hu Xu</a>,</span>
+            <span class="author-block"><a href="https://victorialin.org/" target="_blank">Xi Victoria Lin</a>,</span>
+            <span class="author-block"><a href="https://swdanielli.github.io/" target="_blank">Shang-Wen Li</a>,</span>
+            <span class="author-block"><a href="http://people.csail.mit.edu/jrg" target="_blank">James Glass</a>,</span>
+            <span class="author-block"><a href="https://scottyih.org" target="_blank">Wen-tau Yih</a></span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">MIT CSAIL · Meta FAIR<br/>ICML 2025</span>
+          </div>
+          <div class="column has-text-centered" style="margin-top:0.75rem;">
+            <div class="publication-links">
+              <!-- PDF -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2502.09604.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+                </a>
+              </span>
+              <!-- Code -->
+              <span class="link-block">
+                <a href="https://github.com/facebookresearch/SelfCite" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                </a>
+              </span>
+              <!-- Model -->
+              <span class="link-block">
+                <a href="https://huggingface.co/voidism/SelfCite-8B" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">🤗</span><span>Model</span>
+                </a>
+              </span>
+              <!-- arXiv -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2502.09604" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
                 </a>
               </span>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </div><!-- column -->
+      </div><!-- columns -->
+    </div><!-- container -->
+  </div><!-- hero-body -->
 </section>
 
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- Paper abstract -->
+<!-- ─────────────────────────────── Abstract ─────────────────────────────── -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+      <div class="column is-10" style="font-size:1.3rem;">
+        <!-- Title & Authors -->
+        <!-- Main Content -->
         <div class="content has-text-justified">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
-          </p>
+          <p>LLM-based assistants can read through millions of words of long documents and spit out confident answers in seconds—<strong>but can you trust those answers?</strong> Hallucinations, misinterpretations, and unrelated citations still plague even the proprietary models.</p>
+
+          <p><strong>SelfCite</strong> is our answer: a <em>fully self-supervised</em> method that teaches an LLM to produce <strong>fine-grained, accurate, sentence-level citations</strong>—<em>without a single human-labeled example or proprietary API call</em>.</p>
+
+          <h2 class="title is-4">What’s the secret?</h2>
+
+          <blockquote>
+            <p><strong>Our core idea:</strong> “If removing the cited text makes the model generate a different response—and keeping only the cited text still makes the model generate almost the same response—you’ve found the right evidence that is <strong>necessary</strong> and <strong>sufficient</strong>.”</p>
+          </blockquote>
+
+          <p class="has-text-centered"><img src="https://i.imgur.com/42nnpSm.png" alt="Illustration of SelfCite idea" style="max-width:100%"></p>
+
+          <ol>
+            <li><strong>Full context $C$</strong> (📚) + question $Q$ (🔎) → the LLM generates an response $R$ (💡) and a citation span $E$.</li>
+            <li><strong>Delete $E$</strong> from $C$ → if $E$ is <em>necessary</em>, the LLM can no longer faithfully produce $R$.</li>
+            <li><strong>Keep only $E$</strong> → if $E$ is <em>sufficient</em>, the LLM still produces (almost) the same $R$.</li>
+          </ol>
+
+          <h2 class="title is-4">How do we turn this idea into a reward?</h2>
+
+          <p class="has-text-centered"><img src="https://raw.githubusercontent.com/facebookresearch/SelfCite/refs/heads/main/SelfCite.png" alt="SelfCite architecture" style="max-width:100%"></p>
+
+          <p>We simply measure the <strong>probability change</strong> of generating $R$ after ablating the context. Two quantities are all we need:</p>
+
+          <h3 class="title is-5">Probability&nbsp;Drop</h3>
+          <p>$$\operatorname{Prob\text{-}Drop}(E)=\log p_{\text{LM}}(R\mid C)\;\; -\;\; \log p_{\text{LM}}\bigl(R\mid C\setminus E\bigr).$$</p>
+          <p>This captures whether the cited sentences are <em>necessary</em> for the answer.</p>
+
+          <h3 class="title is-5">Probability&nbsp;Hold</h3>
+          <p>$$\operatorname{Prob\text{-}Hold}(E)=\log p_{\text{LM}}\bigl(R\mid E\bigr)\;\; -\;\; \log p_{\text{LM}}(R\mid C).$$</p>
+          <p>This checks if the cited sentences alone are <em>sufficient</em> to sustain the answer.</p>
+
+          <blockquote>
+            <p>Numbers like “0.97 - 0.01” in the figure are for intuition; the implementation uses log-domain probabilities.</p>
+          </blockquote>
+
+          <h3 class="title is-5">Reward = Prob-Drop + Prob-Hold</h3>
+          <p>$$\text{Reward}(E)=\log p_{\text{LM}}(R\mid E)\;\; -\;\; \log p_{\text{LM}}\bigl(R\mid C\setminus E\bigr).$$</p>
+          <p>This combines <em>necessity</em> and <em>sufficiency</em> in a single <strong>self-supervised</strong> signal—computed with just <strong>two forward passes</strong> and no external labels.</p>
+
+          <h2 class="title is-4">Experiments</h2>
+
+          <p>We apply this reward in Best-of-N (BoN) sampling and preference optimization with <a href="https://arxiv.org/abs/2405.14734" target="_blank">SimPO</a>. Starting from LongCite-8B (73.8 % F1), BoN and SimPO with the SelfCite reward boost citation F1 on LongBench-Cite by <strong>up to 5.3 points</strong> (79.1 % F1), nearly closing the gap with far larger proprietary systems.</p>
+
+          <p class="has-text-centered"><img src="static/images/citation_f1_scores.svg" alt="Citation F1 scores" style="max-width:100%"></p>
+
+          <p>The hatched grey bar is Anthropic’s <a href="https://www.anthropic.com/news/introducing-citations-api" target="_blank">Claude Citations API</a>—still the overall leader thanks to a much larger model—but the margin is now only ~2 percentage points on average, and SelfCite <em>outperforms</em> it on HotpotQA and GovReport.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End paper abstract -->
 
 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
+<!-- ─────────────────────────────── Demo Widget ─────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">SelfCite Reward Demo</h2>
+    <!-- Will render interactive citation widget -->
+    <!-- The widget code (CSS+HTML+JS) is inlined for portability -->
+
+    <style>
+      /*  ✦  overall frame  */
+      .cite-demo{
+        font-family: system-ui, sans-serif;
+        max-width: 900px;
+        margin: 1.2rem auto;
+        padding: 1rem 1.25rem;
+        background: #fafafa;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+      }
+      /*  ✦  scrollable context  */
+      .cite-context{
+        max-height: 500px;
+        overflow-y: auto;
+        padding: .6rem .8rem;
+        background: #fff;
+        border: 1px solid #dcdcdc;
+        border-radius: 6px;
+        font-size: .9rem;
+        line-height: 1.3;
+      }
+      .cite-context p{ margin:0 0 .45rem; }
+      /*  ✦  highlight colours  */
+      .highlight-green{ background: rgba(0,160,0,.18); }
+      .highlight-red  { background: rgba(220,0,0,.18); }
+      /*  ✦  citation chips  */
+      .citations{
+        display: flex; flex-wrap: wrap; gap: .5rem;
+        margin: .9rem 0 0; padding: 0;
+      }
+      .citations li{
+        list-style: none;
+        cursor: pointer;
+        font-size: .85rem;
+        padding: .25rem .55rem;
+        background: #fff;
+        border: 1px solid #c7c7c7;
+        border-radius: 5px;
+        transition: background .15s;
+      }
+      .citations li:hover{ background:#f0f0f0; }
+      /*  ✦  mobile tweaks  */
+      @media(max-width:960px){
+        .cite-demo{ padding:.8rem .9rem; }
+        .cite-context{ max-height:360px; font-size:.85rem; }
+      }
+    </style>
+
+    <div class="cite-demo" id="selfcite-widget">
+      <!--  ❖  context sentences  -->
+      <div class="cite-context">
+        <!-- sample context copied from prompt -->
+        <p id="sent-302" class="context-sent correct"><strong>[302]</strong> In general, consumer advocates believe that any comprehensive federal privacy policy should complement, and not supplant, sector-specific privacy legislation or state-level legislation.</p>
+        <p id="sent-303" class="context-sent correct"><strong>[303]</strong> Finding a global consensus on how to balance open data flows and privacy protection may be key to maintaining trust in the digital environment and advancing international trade.</p>
+        <p id="sent-304" class="context-sent wrong"><strong>[304]</strong> One study found that over 120 countries have laws related to personal data protection.</p>
+        <p id="sent-305" class="context-sent wrong"><strong>[305]</strong> Divergent national privacy approaches raise the costs of doing business and make it harder for governments to collaborate and share data.</p>
+        <p id="sent-306" class="context-sent correct"><strong>[306]</strong> A system for global interoperability … could help minimise costs and allow entities in different jurisdictions … to share data via cross-border data flows.</p>
+        <p id="sent-307" class="context-sent wrong"><strong>[307]</strong> Such a system could help avoid fragmentation of the internet between European, Chinese, and American spheres.</p>
+        <p id="sent-308" class="context-sent wrong"><strong>[308]</strong> For example, Figure 2 suggests the potential of an interoperability system that allows data to flow freely between GDPR- and CBPR-certified economies.</p>
+        <p id="sent-309" class="context-sent wrong"><strong>[309]</strong> The OECD guidelines, G-20 principles, APEC CBPR, CPTPP, and USMCA provisions demonstrate an evolving understanding …</p>
+        <p id="sent-310" class="context-sent wrong"><strong>[310]</strong> The various trade agreements and initiatives … may ultimately pave the way for a broader multilateral understanding.</p>
+        <p id="sent-311" class="context-sent wrong"><strong>[311]</strong> Congress may consider the trade-related aspects of data flows in trade agreements …</p>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
+
+      <!--  ❖  one-line QA  -->
+      <p style="margin:.8rem 0 .4rem"><strong>Query&nbsp;🔎</strong> Please write a one-page summary of the above government report.</p>
+      <p style="margin:0 0 .8rem;font-size:.9rem;line-height:1.35"><strong>Answer&nbsp;💡</strong> […] The report concludes that finding a global consensus on balancing open data flows and privacy protection is key to international trade trust. […]</p>
+      <p style="margin:0 0 .8rem;font-size:.9rem;line-height:1.35"><strong>Best-of-N candidate citations&nbsp;🎲</strong> <span style="font-size:.85rem;color:#666">(click to highlight)</span></p>
+
+      <!--  ❖  candidate citations  -->
+      <ul class="citations">
+        <li data-sents="302,303,306"><strong>(1)</strong> [302-303][306] ✅ <span class="reward">0.578</span></li>
+        <li data-sents="303,305,306"><strong>(2)</strong> [303][305-306] ❌ <span class="reward">0.547</span></li>
+        <li data-sents="303,304,308,310,311"><strong>(3)</strong> [303-304][308][310-311] ❌ <span class="reward">0.461</span></li>
+        <li data-sents="303,309,311"><strong>(4)</strong> [303][309][311] ❌ <span class="reward">0.375</span></li>
+      </ul>
     </div>
+
+    <script>
+    (function(){
+      function toggle(ids,on){
+        ids.forEach(function(id){
+          var el=document.getElementById('sent-'+id.trim());
+          if(!el) return;
+          var ok=el.classList.contains('correct');
+          el.classList.toggle(ok?'highlight-green':'highlight-red',on);
+        });
+      }
+      document.querySelectorAll('#selfcite-widget .citations li').forEach(function(li){
+        var ids=li.dataset.sents.split(',');
+        li.onmouseover=function(){toggle(ids,true);} ;
+        li.onmouseout =function(){toggle(ids,false);} ;
+        li.onclick   =function(){ var active=li.classList.toggle('active'); toggle(ids,active); };
+      });
+    })();
+    </script>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
 
 
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- Youtube embed code here -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ─────────────────────────────── BibTeX ─────────────────────────────── -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+<pre>$@inproceedings{chuang2025selfcite,
+  title={SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models},
+  author={Yung-Sung Chuang and Benjamin Cohen-Wang and Shannon Zejiang Shen and Zhaofeng Wu and Hu Xu and Xi Victoria Lin and Shang-Wen Li and James Glass and Wen-tau Yih},
+  journal={arXiv preprint arXiv:2502.09604},
+  year={2025}
+}$</pre>
   </div>
 </section>
-<!-- End youtube video -->
 
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <video poster="" id="video3" autoplay controls muted loop height="100%">\
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>BibTex Code Here</code></pre>
-    </div>
-</section>
-<!--End BibTex citation -->
-
-
-  <footer class="footer">
+<!-- ─────────────────────────────── Footer ─────────────────────────────── -->
+<footer class="footer">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
-
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page. Feel free to reuse the source—just link back in the footer.<br>
+            Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
-
         </div>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>
