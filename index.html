@@ -114,9 +114,10 @@
         <!-- Title & Authors -->
         <!-- Main Content -->
         <div class="content has-text-justified">
-          <p>LLM-based assistants can read through millions of words of long documents and spit out confident answers in seconds—<strong>but can you trust those answers?</strong> Hallucinations, misinterpretations, and unrelated citations still plague even the proprietary models.</p>
-
-          <p><strong>SelfCite</strong> is our answer: a <em>fully self-supervised</em> method that teaches an LLM to produce <strong>fine-grained, accurate, sentence-level citations</strong>—<em>without a single human-labeled example or proprietary API call</em>.</p>
+          <p>LLM-based assistants can read through millions of words of long documents and spit out confident answers in seconds—<strong>but can you trust those answers?</strong>—<em>Probably not.</em> Hallucinations and misinterpretations still plague even the most advanced proprietary models. As a result, users are often left with the burden of verifying answers themselves. </p>
+          <p class="has-text-centered"><img src="static/images/cite.png" alt="LLM outputs with citations" style="max-width:100%"></p>
+          <p>To ease this burden, we can ask LLMs to also <strong>cite supporting context</strong>—allowing users to verify answers in just a few seconds. But in practice, these citations are often inaccurate, pointing to unrelated or insufficient evidence. And fine-tuning LLMs to fix this problem typically requires expensive <strong>data annotation</strong>.</p>
+          <p><strong>SelfCite</strong> is our solution: a <em>fully self-supervised</em> method that teaches an LLM to produce <strong>fine-grained, accurate, sentence-level citations</strong>—<em>without a single human-labeled example or proprietary API call</em>.</p>
 
           <h2 class="title is-4">What’s the secret?</h2>
 
@@ -124,8 +125,9 @@
             <p><strong>Our core idea:</strong> “If removing the cited text makes the model generate a different response—and keeping only the cited text still makes the model generate almost the same response—you’ve found the right evidence that is <strong>necessary</strong> and <strong>sufficient</strong>.”</p>
           </blockquote>
 
-          <p class="has-text-centered"><img src="https://i.imgur.com/42nnpSm.png" alt="Illustration of SelfCite idea" style="max-width:100%"></p>
+          <p class="has-text-centered"><img src="static/images/idea.png" alt="Illustration of SelfCite idea" style="max-width:100%"></p>
 
+          <p>Explanation:</p>
           <ol>
             <li><strong>Full context $C$</strong> (📚) + question $Q$ (🔎) → the LLM generates an response $R$ (💡) and a citation span $E$.</li>
             <li><strong>Delete $E$</strong> from $C$ → if $E$ is <em>necessary</em>, the LLM can no longer faithfully produce $R$.</li>
@@ -134,7 +136,7 @@
 
           <h2 class="title is-4">How do we turn this idea into a reward?</h2>
 
-          <p class="has-text-centered"><img src="https://raw.githubusercontent.com/facebookresearch/SelfCite/refs/heads/main/SelfCite.png" alt="SelfCite architecture" style="max-width:100%"></p>
+          <p class="has-text-centered"><img src="static/images/SelfCite.png" alt="SelfCite reward calculation" style="max-width:100%"></p>
 
           <p>We simply measure the <strong>probability change</strong> of generating $R$ after ablating the context. Two quantities are all we need:</p>
 
@@ -156,11 +158,11 @@
 
           <h2 class="title is-3">Experiments</h2>
 
-          <p>We apply this reward in Best-of-N (BoN) sampling and preference optimization with <a href="https://arxiv.org/abs/2405.14734" target="_blank">SimPO</a>. Starting from LongCite-8B (73.8 % F1), BoN and SimPO with the SelfCite reward boost citation F1 on LongBench-Cite by <strong>up to 5.3 points</strong> (79.1 % F1), nearly closing the gap with far larger proprietary systems.</p>
+          <p>We apply this reward in Best-of-N (BoN) sampling and preference optimization with <a href="https://arxiv.org/abs/2405.14734" target="_blank">SimPO</a>. Starting from LongCite-8B (73.8 % F1), BoN and SimPO with the SelfCite reward boost its citation F1 on LongBench-Cite by <strong>up to 5.3 points</strong> (79.1 % F1), nearly closing the gap with far larger proprietary systems.</p>
 
           <p class="has-text-centered"><img src="static/images/citation_f1_scores.svg" alt="Citation F1 scores" style="max-width:100%"></p>
 
-          <p>The hatched grey bar is <a href="https://www.anthropic.com/news/introducing-citations-api" target="_blank">Anthropic’s Claude Citations API</a>—still the overall leader thanks to its much larger LLM—but the margin is now only ~2 percentage points on average, and SelfCite <em>outperforms</em> it on HotpotQA and GovReport.</p>
+          <p>The hatched grey bar is <a href="https://www.anthropic.com/news/introducing-citations-api" target="_blank">Anthropic’s Claude Citations API</a>—still the overall leader thanks to the much larger LLM of Claude—but the margin is now only ~2 percentage points on average, and SelfCite with merely an 8B model <em>outperforms</em> it on LongBench-Chat and GovReport.</p>
         </div>
       </div>
     </div>
@@ -227,17 +229,17 @@
     </style>
 
     <div>
-      <p class="is-size-5">Hover over the candidate citations to see which sentences they cover, and check their corresponding SelfCite rewards.</p>
+      <p class="is-size-5">We provide a simple example to show how the SelfCite rewards are assigned to the citation candidates in BoN. Please hover over the candidate citations to see which sentences they cover, and check their corresponding reward values. You will see the rewards are getting lower when more unrelated sentences are included in the citation.</p>
     </div>
     <div class="cite-demo" id="selfcite-widget">
       <!--  ❖  context sentences  -->
       <div class="cite-context">
         <!-- sample context copied from prompt -->
-        <p id="sent-302" class="context-sent correct"><strong>[302]</strong> In general, consumer advocates believe that any comprehensive federal privacy policy should complement, and not supplant, sector-specific privacy legislation or state-level legislation.</p>
-        <p id="sent-303" class="context-sent correct"><strong>[303]</strong> Finding a global consensus on how to balance open data flows and privacy protection may be key to maintaining trust in the digital environment and advancing international trade.</p>
+        <p id="sent-302" class="context-sent correct"><strong>[302] ✅</strong> In general, consumer advocates believe that any comprehensive federal privacy policy should complement, and not supplant, sector-specific privacy legislation or state-level legislation.</p>
+        <p id="sent-303" class="context-sent correct"><strong>[303] ✅</strong> Finding a global consensus on how to balance open data flows and privacy protection may be key to maintaining trust in the digital environment and advancing international trade.</p>
         <p id="sent-304" class="context-sent wrong"><strong>[304]</strong> One study found that over 120 countries have laws related to personal data protection.</p>
         <p id="sent-305" class="context-sent wrong"><strong>[305]</strong> Divergent national privacy approaches raise the costs of doing business and make it harder for governments to collaborate and share data.</p>
-        <p id="sent-306" class="context-sent correct"><strong>[306]</strong> A system for global interoperability … could help minimise costs and allow entities in different jurisdictions … to share data via cross-border data flows.</p>
+        <p id="sent-306" class="context-sent correct"><strong>[306] ✅</strong> A system for global interoperability in a least trade-restrictive and nondiscriminatory way between different national systems could help minimize costs and allow entities in different jurisdictions with varying online privacy regimes to share data via cross-border data flows.</p>
         <p id="sent-307" class="context-sent wrong"><strong>[307]</strong> Such a system could help avoid fragmentation of the internet between European, Chinese, and American spheres.</p>
         <p id="sent-308" class="context-sent wrong"><strong>[308]</strong> For example, Figure 2 suggests the potential of an interoperability system that allows data to flow freely between GDPR- and CBPR-certified economies.</p>
         <p id="sent-309" class="context-sent wrong"><strong>[309]</strong> The OECD guidelines, G-20 principles, APEC CBPR, CPTPP, and USMCA provisions demonstrate an evolving understanding …</p>
@@ -282,6 +284,18 @@
 </div>
 </section>
 
+<!-- ─────────────────────────────── Conclusion ─────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10" style="font-size:1.3rem;">
+        <h2 class="title is-3">Conclusion</h2>
+        <p><strong>SelfCite</strong> shows that LLMs can learn to generate precise, sentence-level citations through self-supervision.  By rewarding evidence that is simultaneously <em>necessary</em> and <em>sufficient</em> for an answer, our method closes much of the citation-quality gap between smaller open models and far larger proprietary systems—without a single human label or external model APIs.  We hope this lightweight approach encourages broader adoption of verifiable LLMs and sparks future work on self-improving context attribution.  All code and models are released, so you can reproduce our results or build on them in your own research.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─────────────────────────────── BibTeX ─────────────────────────────── -->
 <section class="section">
   <div class="container is-max-desktop">
@@ -290,11 +304,13 @@
     <h2 class="title is-3">Citation</h2>
     <p>To cite this work, please use the following BibTeX entry:</p>
 
-<pre style="font-size: 0.8rem;">@inproceedings{chuang2025selfcite,
-  title={SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models},
-  author={Yung-Sung Chuang and Benjamin Cohen-Wang and Shannon Zejiang Shen and Zhaofeng Wu and Hu Xu and Xi Victoria Lin and Shang-Wen Li and James Glass and Wen-tau Yih},
-  journal={arXiv preprint arXiv:2502.09604},
-  year={2025}
+<pre style="font-size: 0.8rem;">@inproceedings{
+    chuang2025selfcite,
+    title={SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models},
+    author={Yung-Sung Chuang and Benjamin Cohen-Wang and Zejiang Shen and Zhaofeng Wu and Hu Xu and Xi Victoria Lin and James R. Glass and Shang-Wen Li and Wen-tau Yih},
+    booktitle={Forty-second International Conference on Machine Learning},
+    year={2025},
+    url={https://openreview.net/forum?id=rKi8eyJBoB}
 }</pre>
 
   </div>
