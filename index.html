@@ -65,8 +65,8 @@
             <span class="author-block"><a href="https://zhaofengwu.github.io" target="_blank">Zhaofeng Wu</a>,</span>
             <span class="author-block"><a href="https://howardhsu.github.io/" target="_blank">Hu Xu</a>,</span>
             <span class="author-block"><a href="https://victorialin.org/" target="_blank">Xi Victoria Lin</a>,</span>
-            <span class="author-block"><a href="https://swdanielli.github.io/" target="_blank">Shang-Wen Li</a>,</span>
             <span class="author-block"><a href="http://people.csail.mit.edu/jrg" target="_blank">James Glass</a>,</span>
+            <span class="author-block"><a href="https://swdanielli.github.io/" target="_blank">Shang-Wen Li</a>,</span>
             <span class="author-block"><a href="https://scottyih.org" target="_blank">Wen-tau Yih</a></span>
           </div>
           <div class="is-size-5 publication-authors">
@@ -107,7 +107,7 @@
 </section>
 
 <!-- ─────────────────────────────── Abstract ─────────────────────────────── -->
-<section class="section hero is-light">
+<section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-10" style="font-size:1.3rem;">
@@ -146,21 +146,21 @@
           <p>$$\operatorname{Prob\text{-}Hold}(E)=\log p_{\text{LM}}\bigl(R\mid E\bigr)\;\; -\;\; \log p_{\text{LM}}(R\mid C).$$</p>
           <p>This checks if the cited sentences alone are <em>sufficient</em> to sustain the answer.</p>
 
-          <blockquote>
+          <blockquote style="font-size: 0.9rem;">
             <p>Numbers like “0.97 - 0.01” in the figure are for intuition; the implementation uses log-domain probabilities.</p>
           </blockquote>
 
           <h3 class="title is-5">Reward = Prob-Drop + Prob-Hold</h3>
           <p>$$\text{Reward}(E)=\log p_{\text{LM}}(R\mid E)\;\; -\;\; \log p_{\text{LM}}\bigl(R\mid C\setminus E\bigr).$$</p>
-          <p>This combines <em>necessity</em> and <em>sufficiency</em> in a single <strong>self-supervised</strong> signal—computed with just <strong>two forward passes</strong> and no external labels.</p>
+          <p>This combines <em>necessity</em> and <em>sufficiency</em> in a single <strong>self-supervised</strong> reward—computed with just <strong>two forward passes</strong> and no external annotations or models needed.</p>
 
-          <h2 class="title is-4">Experiments</h2>
+          <h2 class="title is-3">Experiments</h2>
 
           <p>We apply this reward in Best-of-N (BoN) sampling and preference optimization with <a href="https://arxiv.org/abs/2405.14734" target="_blank">SimPO</a>. Starting from LongCite-8B (73.8 % F1), BoN and SimPO with the SelfCite reward boost citation F1 on LongBench-Cite by <strong>up to 5.3 points</strong> (79.1 % F1), nearly closing the gap with far larger proprietary systems.</p>
 
           <p class="has-text-centered"><img src="static/images/citation_f1_scores.svg" alt="Citation F1 scores" style="max-width:100%"></p>
 
-          <p>The hatched grey bar is Anthropic’s <a href="https://www.anthropic.com/news/introducing-citations-api" target="_blank">Claude Citations API</a>—still the overall leader thanks to a much larger model—but the margin is now only ~2 percentage points on average, and SelfCite <em>outperforms</em> it on HotpotQA and GovReport.</p>
+          <p>The hatched grey bar is <a href="https://www.anthropic.com/news/introducing-citations-api" style="color: chocolate;" target="_blank">Anthropic’s Claude Citations API</a>—still the overall leader thanks to its much larger LLM—but the margin is now only ~2 percentage points on average, and SelfCite <em>outperforms</em> it on HotpotQA and GovReport.</p>
         </div>
       </div>
     </div>
@@ -171,7 +171,9 @@
 <!-- ─────────────────────────────── Demo Widget ─────────────────────────────── -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">SelfCite Reward Demo</h2>
+    <div class="columns is-centered">
+      <div class="column is-10" style="font-size:1.3rem;">
+    <h2 class="title is-3">How does the reward work?</h2>
     <!-- Will render interactive citation widget -->
     <!-- The widget code (CSS+HTML+JS) is inlined for portability -->
 
@@ -224,6 +226,9 @@
       }
     </style>
 
+    <div>
+      <p class="is-size-5">Hover over the candidate citations to see which sentences they cover, and check their corresponding SelfCite rewards.</p>
+    </div>
     <div class="cite-demo" id="selfcite-widget">
       <!--  ❖  context sentences  -->
       <div class="cite-context">
@@ -243,7 +248,7 @@
       <!--  ❖  one-line QA  -->
       <p style="margin:.8rem 0 .4rem"><strong>Query&nbsp;🔎</strong> Please write a one-page summary of the above government report.</p>
       <p style="margin:0 0 .8rem;font-size:.9rem;line-height:1.35"><strong>Answer&nbsp;💡</strong> […] The report concludes that finding a global consensus on balancing open data flows and privacy protection is key to international trade trust. […]</p>
-      <p style="margin:0 0 .8rem;font-size:.9rem;line-height:1.35"><strong>Best-of-N candidate citations&nbsp;🎲</strong> <span style="font-size:.85rem;color:#666">(click to highlight)</span></p>
+      <p style="margin:0 0 .8rem;font-size:.9rem;line-height:1.35"><strong>Best-of-N candidate citations&nbsp;🎲</strong> <span style="font-size:.85rem;color:#666">(hover to highlight)</span></p>
 
       <!--  ❖  candidate citations  -->
       <ul class="citations">
@@ -273,20 +278,28 @@
     })();
     </script>
   </div>
+</div>
+</div>
 </section>
 
-
 <!-- ─────────────────────────────── BibTeX ─────────────────────────────── -->
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-<pre>$@inproceedings{chuang2025selfcite,
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10" style="font-size:1.3rem;">
+    <h2 class="title is-3">Citation</h2>
+    <p>To cite this work, please use the following BibTeX entry:</p>
+
+<pre style="font-size: 0.8rem;">@inproceedings{chuang2025selfcite,
   title={SelfCite: Self-Supervised Alignment for Context Attribution in Large Language Models},
   author={Yung-Sung Chuang and Benjamin Cohen-Wang and Shannon Zejiang Shen and Zhaofeng Wu and Hu Xu and Xi Victoria Lin and Shang-Wen Li and James Glass and Wen-tau Yih},
   journal={arXiv preprint arXiv:2502.09604},
   year={2025}
-}$</pre>
+}</pre>
+
   </div>
+    </div>
+    </div>
 </section>
 
 <!-- ─────────────────────────────── Footer ─────────────────────────────── -->
